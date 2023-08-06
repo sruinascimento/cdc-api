@@ -18,7 +18,7 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name) {
+    public Category(@NotBlank String name) {
         this.name = name;
     }
 
