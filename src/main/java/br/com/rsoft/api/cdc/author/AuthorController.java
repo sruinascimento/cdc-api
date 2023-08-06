@@ -25,7 +25,7 @@ public class AuthorController {
             return ResponseEntity.badRequest().body("Email must be unique");
         }
 
-        Author author = newAuthorRequest.toEntity();
+        Author author = newAuthorRequest.toModel();
         authorRepository.save(author);
         return ResponseEntity.ok(new NewAuthorResponse(author));
     }

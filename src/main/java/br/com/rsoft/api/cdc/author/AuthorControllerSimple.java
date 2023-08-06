@@ -22,7 +22,7 @@ public class AuthorControllerSimple {
             return ResponseEntity.badRequest().body("Email já existente");
         }
 
-        Author author = newAuthorRequest.toEntity();
+        Author author = newAuthorRequest.toModel();
         entityManager.persist(author);
 
         return ResponseEntity.ok().body(new NewAuthorResponse(author));
