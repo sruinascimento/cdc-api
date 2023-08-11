@@ -22,10 +22,6 @@ public class CategoryController {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }
 
-        if (categoryRepository.existsByName(newCategoryRequest.name())) {
-            return ResponseEntity.badRequest().body("Category name must be unique");
-        }
-
         Category category = newCategoryRequest.toModel();
         categoryRepository.save(category);
 
