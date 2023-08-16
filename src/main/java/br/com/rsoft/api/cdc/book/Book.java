@@ -13,17 +13,22 @@ import static jakarta.persistence.GenerationType.*;
 @Table(name = "books")
 public class Book {
     @Id
-    @GeneratedValue(strategy = IDENTITY  )
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String title;
-    private String sumary;
+    @Column(columnDefinition = "TEXT")
+    private String summary;
     private BigDecimal price;
+    @Column(name = "number_of_pages")
     private Integer numberOfPages;
     private String isbn;
+    @Column(name = "publication_date")
     private LocalDate publicationDate;
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
     @ManyToOne
+    @JoinColumn(name = "author_id")
     private Author author;
 
     @Deprecated
