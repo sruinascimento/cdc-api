@@ -1,7 +1,8 @@
 CREATE TABLE books (
     id               BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     title            VARCHAR(255) UNIQUE NOT NULL,
-    summary          TEXT,
+    summary          TEXT NOT NULL,
+    table_of_contents TEXT,
     price            DECIMAL(10,2) NOT NULL,
     number_of_pages  INT NOT NULL,
     isbn             VARCHAR(13) UNIQUE NOT NULL,
