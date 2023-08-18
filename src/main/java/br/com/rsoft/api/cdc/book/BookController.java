@@ -10,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@RestController
 public class BookController {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
@@ -32,13 +34,13 @@ public class BookController {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }
 
-        Category category = categoryRepository.findByName(newBookRequest.category()).orElseThrow(
-                () -> new ResponseStatusException(NOT_FOUND, format("Category with name %s not found",
-                        newBookRequest.category())));
+        Category category = categoryRepository.findById(newBookRequest.categoryId()).orElseThrow(
+                () -> new ResponseStatusException(NOT_FOUND, format("Category with id %s not found",
+                        newBookRequest.categoryId())));
 
-        Author author = authorRepository.findByName(newBookRequest.author()).orElseThrow(
-                () -> new ResponseStatusException(NOT_FOUND, format("Author with name %s not found",
-                        newBookRequest.author())));
+        Author author = authorRepository.findById(newBookRequest.authorId()).orElseThrow(
+                () -> new ResponseStatusException(NOT_FOUND, format("Author with id %s not found",
+                        newBookRequest.authorId())));
 
         Book book = newBookRequest.toModel();
         book.setCategory(category);

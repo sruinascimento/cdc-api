@@ -11,12 +11,12 @@ public record NewBookRequest(
         @UniqueValue(domainClass = Book.class, fieldName = "title")
         String title,
         @NotBlank
-        @Max(500)
+        @Size(max = 500)
         String summary,
         String tableOfContent,
         @DecimalMin("20.00")
         BigDecimal price,
-        @NotBlank
+        @NotNull
         @Min(100)
         Integer numberOfPages,
         @NotBlank
@@ -24,9 +24,9 @@ public record NewBookRequest(
         @Future
         LocalDate publicationDate,
         @NotNull
-        String category,
+        Long categoryId,
         @NotNull
-        String author) {
+        Long authorId) {
     public Book toModel() {
         return new Book(title, summary, tableOfContent, price, numberOfPages, isbn, publicationDate);
     }
