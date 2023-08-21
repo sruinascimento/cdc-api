@@ -2,7 +2,9 @@ package br.com.rsoft.api.cdc.book;
 
 import br.com.rsoft.api.cdc.author.Author;
 import br.com.rsoft.api.cdc.category.Category;
+import br.com.rsoft.api.cdc.validator.UniqueValue;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,15 +17,22 @@ public class Book {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @NotBlank
     private String title;
+    @NotBlank
+    @Size(max = 500)
     @Column(columnDefinition = "TEXT")
     private String summary;
     @Column(columnDefinition = "TEXT", name = "table_of_contents")
     private String tableOfContent;
+    @NotNull
+    @DecimalMin("20.00")
     private BigDecimal price;
     @Column(name = "number_of_pages")
     private Integer numberOfPages;
+    @NotBlank
     private String isbn;
+    @Future
     @Column(name = "publication_date")
     private LocalDate publicationDate;
     @ManyToOne
@@ -37,7 +46,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String summary, String tableOfContent, BigDecimal price, Integer numberOfPages, String isbn, LocalDate publicationDate) {
+    public Book(@NotBlank String title,
+                @NotBlank String summary,
+                String tableOfContent,
+                @NotNull @DecimalMin("20.00") BigDecimal price,
+                @NotNull @Min(20) Integer numberOfPages,
+                @NotBlank String isbn,
+                @Future LocalDate publicationDate) {
         this.title = title;
         this.summary = summary;
         this.tableOfContent = tableOfContent;

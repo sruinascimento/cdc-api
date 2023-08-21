@@ -26,7 +26,7 @@ public class Author {
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(name = "registred_at")
-    private LocalDate registredAt = LocalDate.now();
+    private final LocalDate registredAt = LocalDate.now();
 
     @Deprecated
     public Author() {
