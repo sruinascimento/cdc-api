@@ -2,14 +2,13 @@ package br.com.rsoft.api.cdc.book;
 
 import br.com.rsoft.api.cdc.author.Author;
 import br.com.rsoft.api.cdc.category.Category;
-import br.com.rsoft.api.cdc.validator.UniqueValue;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static jakarta.persistence.GenerationType.*;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "books")
