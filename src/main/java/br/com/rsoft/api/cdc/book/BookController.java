@@ -8,10 +8,13 @@ import br.com.rsoft.api.cdc.category.CategoryRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -49,5 +52,18 @@ public class BookController {
         bookRepository.save(book);
 
         return ResponseEntity.ok(new NewBookResponse(book));
+    }
+
+    @GetMapping("/books")
+    public ResponseEntity<List<BookInfo>> listBooks() {
+        List<BookInfo> books = bookRepository.findAll().stream()
+                .map(BookInfo::new)
+                .toList();
+
+        if (books.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(books);
     }
 }
