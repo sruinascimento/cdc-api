@@ -3,6 +3,7 @@ package br.com.rsoft.api.cdc.book;
 import br.com.rsoft.api.cdc.author.AuthorDetail;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 
 public record BookDetail(String title,
                          BigDecimal price,
@@ -19,7 +20,7 @@ public record BookDetail(String title,
                 book.getTableOfContent(),
                 book.getIsbn(),
                 book.getNumberOfPages(),
-                book.getPublicationDate().toString(),
+                book.getPublicationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 new AuthorDetail(book.getAuthor().getName(), book.getAuthor().getDescription()));
     }
 }
