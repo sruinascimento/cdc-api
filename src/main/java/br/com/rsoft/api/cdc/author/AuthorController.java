@@ -16,7 +16,7 @@ public class AuthorController {
     }
 
     @PostMapping("/author")
-    ResponseEntity<?> addAuthor(@RequestBody @Valid NewAuthorRequest newAuthorRequest, BindingResult bindingResult) {
+    ResponseEntity addAuthor(@RequestBody @Valid NewAuthorRequest newAuthorRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }

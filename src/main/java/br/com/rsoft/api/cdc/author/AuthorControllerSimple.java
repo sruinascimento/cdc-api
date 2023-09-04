@@ -17,7 +17,7 @@ public class AuthorControllerSimple {
 
     @PostMapping("/authorv2")
     @Transactional
-    public ResponseEntity<?> addAuthor(@RequestBody @Valid NewAuthorRequest newAuthorRequest) {
+    public ResponseEntity addAuthor(@RequestBody @Valid NewAuthorRequest newAuthorRequest) {
         if (isEmailAlreadyUsed(newAuthorRequest.email())) {
             return ResponseEntity.badRequest().body("Email já existente");
         }

@@ -17,7 +17,7 @@ public class CountryController {
     }
 
     @PostMapping("/country")
-    ResponseEntity<?> addCountry(@RequestBody @Valid NewCountryRequest newCountryRequest, BindingResult bindingResult) {
+    ResponseEntity addCountry(@RequestBody @Valid NewCountryRequest newCountryRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }

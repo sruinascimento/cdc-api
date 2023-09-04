@@ -29,7 +29,7 @@ public class BookController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<?> addBook(@RequestBody @Valid NewBookRequest newBookRequest, BindingResult bindingResult) {
+    public ResponseEntity addBook(@RequestBody @Valid NewBookRequest newBookRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }

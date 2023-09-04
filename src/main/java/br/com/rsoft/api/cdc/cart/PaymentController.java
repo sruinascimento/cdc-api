@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PaymentController {
     @PostMapping("/payment")
-    ResponseEntity<?> addPayment(@RequestBody @Valid NewPaymentRequest newPaymentRequest, BindingResult bindingResult) {
+    ResponseEntity addPayment(@RequestBody @Valid NewPaymentRequest newPaymentRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }

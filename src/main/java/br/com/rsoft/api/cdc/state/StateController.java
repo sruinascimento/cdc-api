@@ -29,7 +29,7 @@ public class StateController {
     }
 
     @PostMapping("/state")
-    public ResponseEntity<?> addState(@RequestBody @Valid NewStateRequest newStateRequest, BindingResult bindingResult) {
+    public ResponseEntity addState(@RequestBody @Valid NewStateRequest newStateRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
         }
