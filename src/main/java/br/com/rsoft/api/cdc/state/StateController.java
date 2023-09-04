@@ -1,6 +1,5 @@
 package br.com.rsoft.api.cdc.state;
 
-import br.com.rsoft.api.cdc.author.Author;
 import br.com.rsoft.api.cdc.author.ValidationErrorHandler;
 import br.com.rsoft.api.cdc.country.Country;
 import br.com.rsoft.api.cdc.country.CountryRepository;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.Map;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
