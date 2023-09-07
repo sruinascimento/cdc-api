@@ -1,5 +1,6 @@
 package br.com.rsoft.api.cdc.author;
 
+import br.com.rsoft.api.cdc.validator.ValidationErrorHandler;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package br.com.rsoft.api.cdc.state;
 
-import br.com.rsoft.api.cdc.author.ValidationErrorHandler;
+import br.com.rsoft.api.cdc.validator.ValidationErrorHandler;
 import br.com.rsoft.api.cdc.country.Country;
 import br.com.rsoft.api.cdc.country.CountryRepository;
 import jakarta.validation.Valid;

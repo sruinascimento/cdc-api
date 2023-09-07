@@ -1,4 +1,4 @@
-package br.com.rsoft.api.cdc.author;
+package br.com.rsoft.api.cdc.validator;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

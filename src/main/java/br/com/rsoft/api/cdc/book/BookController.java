@@ -2,7 +2,7 @@ package br.com.rsoft.api.cdc.book;
 
 import br.com.rsoft.api.cdc.author.Author;
 import br.com.rsoft.api.cdc.author.AuthorRepository;
-import br.com.rsoft.api.cdc.author.ValidationErrorHandler;
+import br.com.rsoft.api.cdc.validator.ValidationErrorHandler;
 import br.com.rsoft.api.cdc.category.Category;
 import br.com.rsoft.api.cdc.category.CategoryRepository;
 import jakarta.validation.Valid;
