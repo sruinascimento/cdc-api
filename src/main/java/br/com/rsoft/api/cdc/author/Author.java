@@ -23,7 +23,6 @@ public class Author {
     private String email;
     @NotBlank
     @Size(max = 400)
-    @Column(columnDefinition = "TEXT")
     private String description;
     @Column(name = "registred_at")
     private final LocalDate registredAt = LocalDate.now();
