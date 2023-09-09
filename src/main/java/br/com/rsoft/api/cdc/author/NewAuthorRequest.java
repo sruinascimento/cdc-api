@@ -1,5 +1,6 @@
 package br.com.rsoft.api.cdc.author;
 
+import br.com.rsoft.api.cdc.validator.UniqueValue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -10,11 +11,12 @@ public record NewAuthorRequest(
         String name,
         @NotBlank
         @Email
+        @UniqueValue(domainClass = Author.class, fieldName = "email")
         String email,
         @NotBlank
         @Size(max = 400)
-        String description){
+        String description) {
     public Author toModel() {
-       return new Author(name(), email(), description());
+        return new Author(name(), email(), description());
     }
 }
