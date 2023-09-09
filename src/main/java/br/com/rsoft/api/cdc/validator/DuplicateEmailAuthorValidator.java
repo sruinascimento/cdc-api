@@ -1,5 +1,8 @@
-package br.com.rsoft.api.cdc.author;
+package br.com.rsoft.api.cdc.validator;
 
+import br.com.rsoft.api.cdc.author.Author;
+import br.com.rsoft.api.cdc.author.AuthorRepository;
+import br.com.rsoft.api.cdc.author.NewAuthorRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -22,10 +25,6 @@ public class DuplicateEmailAuthorValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        if (errors.hasErrors()) {
-            return;
-        }
-
         NewAuthorRequest newAuthorRequest = (NewAuthorRequest) target;
         Optional<Author> possibleAuthor = authorRepository.findByEmail(newAuthorRequest.email());
 

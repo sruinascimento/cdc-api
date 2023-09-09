@@ -1,5 +1,6 @@
 package br.com.rsoft.api.cdc.author;
 
+import br.com.rsoft.api.cdc.validator.DuplicateEmailAuthorValidator;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
