@@ -1,5 +1,6 @@
 package br.com.rsoft.api.cdc.validator;
 
+import br.com.rsoft.api.cdc.error.EntityNotFoundException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.FieldError;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class CustomErrorHandler {
@@ -38,4 +40,11 @@ public class CustomErrorHandler {
     private String getErrorMessage(ObjectError message) {
         return messageSource.getMessage(message, LocaleContextHolder.getLocale());
     }
+    
+    @ResponseStatus(NOT_FOUND)
+    @ExceptionHandler(EntityNotFoundException.class)
+    public String handleEntityNotFoundException(EntityNotFoundException exception) {
+        return exception.getMessage();
+    }
+
 }
