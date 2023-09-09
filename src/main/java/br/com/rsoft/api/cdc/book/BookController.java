@@ -2,19 +2,14 @@ package br.com.rsoft.api.cdc.book;
 
 import br.com.rsoft.api.cdc.author.Author;
 import br.com.rsoft.api.cdc.author.AuthorRepository;
-import br.com.rsoft.api.cdc.validator.ValidationErrorHandler;
 import br.com.rsoft.api.cdc.category.Category;
 import br.com.rsoft.api.cdc.category.CategoryRepository;
+import br.com.rsoft.api.cdc.error.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import static java.lang.String.format;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 public class BookController {
@@ -29,18 +24,12 @@ public class BookController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity addBook(@RequestBody @Valid NewBookRequest newBookRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
-        }
-
+    public ResponseEntity<NewBookResponse> addBook(@RequestBody @Valid NewBookRequest newBookRequest) {
         Category category = categoryRepository.findById(newBookRequest.categoryId()).orElseThrow(
-                () -> new ResponseStatusException(NOT_FOUND, format("Category with id %s not found",
-                        newBookRequest.categoryId())));
+                () -> new EntityNotFoundException("Category", newBookRequest.categoryId()));
 
         Author author = authorRepository.findById(newBookRequest.authorId()).orElseThrow(
-                () -> new ResponseStatusException(NOT_FOUND, format("Author with id %s not found",
-                        newBookRequest.authorId())));
+                () -> new EntityNotFoundException("Author", newBookRequest.authorId()));
 
         Book book = newBookRequest.toModel();
         book.setCategory(category);
@@ -66,8 +55,7 @@ public class BookController {
 
     @GetMapping("/book/{id}")
     ResponseEntity<BookDetail> getBookDetail(@PathVariable Long id) {
-        Book book = bookRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(NOT_FOUND, format("Book not found with id %d", id)));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Book", id));
         return ResponseEntity.ok(new BookDetail(book));
     }
 }
