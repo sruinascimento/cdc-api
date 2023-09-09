@@ -1,9 +1,7 @@
 package br.com.rsoft.api.cdc.category;
 
-import br.com.rsoft.api.cdc.validator.ValidationErrorHandler;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,15 +15,9 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    ResponseEntity addCategory(@RequestBody @Valid NewCategoryRequest newCategoryRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(ValidationErrorHandler.getErrorMessages(bindingResult));
-        }
-
+    ResponseEntity<NewCategoryResponse> addCategory(@RequestBody @Valid NewCategoryRequest newCategoryRequest) {
         Category category = newCategoryRequest.toModel();
         categoryRepository.save(category);
-
         return ResponseEntity.ok(new NewCategoryResponse(category));
-
     }
 }
